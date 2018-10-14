@@ -1,5 +1,7 @@
 # Terraform-Turotials
 
+## Terraform v0.11.8 (provider.aws v1.40.0)
+
 [Introduction to Terraform with AWS elb & nginx](https://www.bogotobogo.com/DevOps/Terraform/Terraform-Introduction-AWS-elb-nginx.php)
 
 [Terraform Tutorial - terraform format(tf) and interpolation(variables)](https://www.bogotobogo.com/DevOps/Terraform/Terraform-terraform-format-tf-and-interpolation-variables.php)
