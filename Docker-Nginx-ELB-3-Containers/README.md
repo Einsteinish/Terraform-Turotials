@@ -1,4 +1,4 @@
-# terraform-nginx-docker-demo
+# terraform-nginx-docker-containers-behind-a-classic-ELB
 
 3 containers in public subnets behind a classic ELB
 
