@@ -26,6 +26,8 @@ To teardown the EC2 demo cluster:
 ```
 $ terraform destroy -var "aws_access_key=······" -var "aws_secret_key=······"
 ```
+Note: we can skip the keys args in the command if they are set via shell/env exported variables.
+
 ## Regions
 The default AWS region is US East Virginia (us-east-1).  However, we can specify an alternate US region on the command line by passing in an extra `aws_region` argument.  Legal values are `us-east-1`, `us-east-2`, `us-west-1`, and `us-west-2` (default).  For example:
 ```
@@ -33,7 +35,7 @@ $ terraform plan -out=aws.tfplan -var "aws_access_key=······" -var "aws_se
 $ terraform apply aws.tfplan
 $ terraform destroy -var "aws_access_key=······" -var "aws_secret_key=······" -var "aws_region=us-east-2"
 ```
-Note: we can skip the keys args in the command if they are set in either shell/env exported variables.
+Note: we can skip the keys args in the command if they are set via shell/env exported variables.
 
 ## URL
 Applying this Terraform configuration returns the load balancer's public URL on the last line of output.  This URL can be used to view the default nginx homepage.
