@@ -21,7 +21,7 @@ resource "aws_security_group" "docker_demo_elb" {
 
 # use an old Classic load balancer rather than a more modern (and more complex) Application load balancer.
 resource "aws_elb" "docker_demo" {
-  name                      = "Docker-Demo-ELB"
+  name                      = "docker-demo-elb"
   cross_zone_load_balancing = true
   subnets                   = ["${data.aws_subnet_ids.public.ids}"]
 

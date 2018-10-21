@@ -1,6 +1,6 @@
 # terraform-nginx-docker-demo
 
-3 containers with classic ELB
+3 containers in public subnets behind a classic ELB
 
 A Terraform configuration to launch a cluster of EC2 instances.  Each EC2 instance runs a single nginx Docker container (based on the latest official nginx Docker image).  One EC2 instance is launched in each availability zone of the current region (see Regions below).  The load balancer and EC2 instances are launched in a **custom VPC**, and use custom security groups.
 
@@ -27,12 +27,13 @@ To teardown the EC2 demo cluster:
 $ terraform destroy -var "aws_access_key=······" -var "aws_secret_key=······"
 ```
 ## Regions
-The default AWS region is US West Oregon.  However, you can specify an alternate US region on the command line by passing in an extra `aws_region` argument.  Legal values are `us-east-1`, `us-east-2`, `us-west-1`, and `us-west-2` (default).  For example:
+The default AWS region is US East Virginia (us-east-1).  However, we can specify an alternate US region on the command line by passing in an extra `aws_region` argument.  Legal values are `us-east-1`, `us-east-2`, `us-west-1`, and `us-west-2` (default).  For example:
 ```
 $ terraform plan -out=aws.tfplan -var "aws_access_key=······" -var "aws_secret_key=······" -var "aws_region=us-east-2"
 $ terraform apply aws.tfplan
 $ terraform destroy -var "aws_access_key=······" -var "aws_secret_key=······" -var "aws_region=us-east-2"
 ```
+Note: we can skip the keys args in the command if they are set in either shell/env exported variables.
 
 ## URL
 Applying this Terraform configuration returns the load balancer's public URL on the last line of output.  This URL can be used to view the default nginx homepage.
