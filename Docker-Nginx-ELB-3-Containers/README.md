@@ -17,6 +17,11 @@ Applying the configuration takes about 30 seconds (in US West Oregon), and anoth
 AWS access credentials must be supplied on the command line (see example below).  This Terraform script was tested in my own AWS account with a user that has the `AmazonEC2FullAccess` and `AmazonVPCFullAccess` policies.  It was also tested in the Splice-supplied AWS account with a user that has the `AdministratorAccess` policy.
 
 ## Command Line Examples
+To setup provisioner
+```
+$ terraform init
+```
+
 To launch the EC2 demo cluster:
 ```
 $ terraform plan -out=aws.tfplan -var "aws_access_key=······" -var "aws_secret_key=······"
