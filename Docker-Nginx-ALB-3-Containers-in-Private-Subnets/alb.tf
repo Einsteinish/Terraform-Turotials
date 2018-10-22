@@ -57,7 +57,7 @@ resource "aws_alb_listener" "http_listener" {
 }
 
 # target group attach
-# using nested interpolation functions and the count parameter to the "aws_alb_target_group_attachment
+# using nested interpolation functions and the count parameter to the "aws_alb_target_group_attachment"
 resource "aws_lb_target_group_attachment" "docker-demo" {
   count            = "${length(var.azs)}"
   target_group_arn = "${aws_alb_target_group.docker-demo-tg.arn}"
@@ -65,7 +65,7 @@ resource "aws_lb_target_group_attachment" "docker-demo" {
   port             = 80
 }
 
-# ELB DNS is generated dynamically, return URL so that it can be used
+# ALB DNS is generated dynamically, return URL so that it can be used
 output "url" {
   value = "http://${aws_alb.docker_demo_alb.dns_name}/"
 }
