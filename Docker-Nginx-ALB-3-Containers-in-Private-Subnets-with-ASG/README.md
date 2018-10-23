@@ -1,13 +1,12 @@
-# terraform-nginx-docker-containers-behind-a-ALB-with-private-subnets-instances-in-target-groups
-
-3 containers in private subnets behind a Application Load Balancer (ALB)
+# terraform-nginx-docker-containers-behind-a-ALB-with-private-subnets-instances-with-ASG
+3 containers in private subnets behind a Application Load Balancer (ALB) with AutoScaling Group
 
 A Terraform configuration to launch a cluster of EC2 instances.  Each EC2 instance runs a single nginx Docker container (based on the latest official nginx Docker image).  One EC2 instance is launched in each availability zone of the current region (see Regions below).  The load balancer and EC2 instances are launched in a **custom VPC**, and use custom security groups.
 
 Applying the configuration takes about 30 seconds (in US West Oregon), and another two or three minutes for the EC2 instances to become healthy and for the load balancer DNS record to propagate.
 
 ## Files
-+ `aws.tf` - AWS Provider.
++ `provider.tf` - AWS Provider.
 + `ec2.tf` - Launches EC2 instances, during initialization each instance installs Docker and the nginx Docker image.
 + `alb.tf` - Launches elastic load balancer for EC2 instances running nginx.
 + `vars.tf` - Used by other files, sets default AWS region, calculates availability zones, etc.
