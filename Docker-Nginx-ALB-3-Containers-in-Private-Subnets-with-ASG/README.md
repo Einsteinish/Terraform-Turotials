@@ -1,4 +1,7 @@
 # terraform-nginx-docker-containers-behind-a-ALB-with-private-subnets-instances-with-ASG
+
+VPC with 3 AZs with a public/private for each AZs
+ 
 3 containers in private subnets behind a Application Load Balancer (ALB) with AutoScaling Group
 
 A Terraform configuration to launch a cluster of EC2 instances.  Each EC2 instance runs a single nginx Docker container (based on the latest official nginx Docker image).  One EC2 instance is launched in each availability zone of the current region (see Regions below).  The load balancer and EC2 instances are launched in a **custom VPC**, and use custom security groups.
