@@ -13,9 +13,6 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-# dynamically retrieves all availability zones for current region
-#data "aws_availability_zones" "available" {}
-
 # specifying AZs 
 #   comment off this "azs" to retrive all AZs dynamically (uncomment the line above "data ...")
 variable "azs" {

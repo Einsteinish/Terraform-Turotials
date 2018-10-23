@@ -24,7 +24,7 @@ resource "aws_elb" "docker_demo" {
   name                      = "docker-demo-elb"
   cross_zone_load_balancing = true
   #subnets                   = ["${aws_subnet_ids.private.ids}"]
-  subnets = ["${aws_subnet.public.*.id}"]
+  subnets = ["${aws_subnet.private.*.id}"]
 
   # short interval and threshold values to reduce the time for instances to become "healthy"
   health_check {

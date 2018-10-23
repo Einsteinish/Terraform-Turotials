@@ -33,5 +33,5 @@ variable "rds_admin_password" {
 }
 
 variable "rds_publicly_accessible" {
-  default = "true"
+  default = "false"
 }

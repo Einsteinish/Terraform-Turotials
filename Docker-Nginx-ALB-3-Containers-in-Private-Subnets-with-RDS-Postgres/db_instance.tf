@@ -1,12 +1,13 @@
 resource "aws_security_group" "rds_security_group" {
   name        = "rds_security_group"
   description = "rds security group"
+  vpc_id      = "${aws_vpc.demo.id}"
 
   ingress {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["1.2.3.4/32"]
+    cidr_blocks = ["10.0.0.0/24"]
   }
 
   egress {
@@ -32,9 +33,22 @@ resource "aws_db_instance" "db" {
   password          = "${var.rds_admin_password}"
   publicly_accessible    = "${var.rds_publicly_accessible}"
   vpc_security_group_ids = ["${aws_security_group.rds_security_group.id}"]
+  final_snapshot_identifier = "demo-db-backup"
+  skip_final_snapshot       = true
+
+  # commented : if there is no default subnet, this will give us an error
+  #db_subnet_group_name   = "rds_test"
+
   tags {
     Name = "Postgres Database in ${var.aws_region}"
   }
+}
+
+resource "aws_db_subnet_group" "rds_test" {
+  name       = "rds_test"
+  count         = "3"
+  subnet_ids                   = ["${aws_subnet.private.*.id}"]
+
 }
 
 output "postgress-address" {
