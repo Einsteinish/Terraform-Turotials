@@ -10,8 +10,8 @@ Applying the configuration takes about 30 seconds (in US West Oregon), and anoth
 
 ## Files
 + `provider.tf` - AWS Provider.
-+ `ec2.tf` - Launches EC2 instances, during initialization each instance installs Docker and the nginx Docker image.
-+ `alb.tf` - Launches elastic load balancer for EC2 instances running nginx.
++ `ec2.tf` - Launches EC2 instances, during initialization each instance installs Docker and the nginx Docker image. But with ASG, this is not used. Instead, the container instance creation deferred to ASG (alb.tf)
++ `alb.tf` - Application load balancer (alb) with ASG.
 + `vars.tf` - Used by other files, sets default AWS region, calculates availability zones, etc.
 + `vpc.tf` - Launches VPC, subnets, route tables, etc.
 

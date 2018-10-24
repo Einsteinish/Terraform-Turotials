@@ -32,8 +32,34 @@ resource "aws_alb" "docker_demo_alb" {
   }
 }
 
+# listener
+resource "aws_alb_listener" "alb_listener" {
+  load_balancer_arn = "${aws_alb.docker_demo_alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    target_group_arn = "${aws_alb_target_group.docker_demo_alb_tg.arn}"
+    type             = "forward"
+  }
+}
+
+#resource "aws_alb_listener_rule" "listener_rule" {
+#  depends_on   = ["aws_alb_target_group.docker_demo_alb_tg"]  
+#  listener_arn = "${aws_alb_listener.alb_listener.arn}"  
+#  priority     = "${var.priority}"   
+#  action {    
+#    type             = "forward"    
+#    target_group_arn = "${aws_alb_target_group.docker_demo_alb_tg.id}"  
+#  }   
+#  condition {    
+#    field  = "path-pattern"    
+#    values = ["${var.alb_path}"]  
+#  }
+#}
+
 # alb target group
-resource "aws_alb_target_group" "docker-demo-tg" {
+resource "aws_alb_target_group" "docker_demo_alb_tg" {
   name     = "docker-demo-alb-target-group"
   port     = 80
   protocol = "HTTP"
@@ -44,26 +70,15 @@ resource "aws_alb_target_group" "docker-demo-tg" {
   }
 }
 
-# listener
-resource "aws_alb_listener" "http_listener" {
-  load_balancer_arn = "${aws_alb.docker_demo_alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
 
-  default_action {
-    target_group_arn = "${aws_alb_target_group.docker-demo-tg.arn}"
-    type             = "forward"
-  }
-}
-
-# target group attach
+# target group attach - instance attachment
 # using nested interpolation functions and the count parameter to the "aws_alb_target_group_attachment"
-resource "aws_lb_target_group_attachment" "docker-demo" {
-  count            = "${length(var.azs)}"
-  target_group_arn = "${aws_alb_target_group.docker-demo-tg.arn}"
-  target_id        =  "${element(split(",", join(",", aws_instance.docker_demo.*.id)), count.index)}"
-  port             = 80
-}
+#resource "aws_alb_target_group_attachment" "alb_tg_attachment" {
+#  count            = "${length(var.azs)}"
+#  target_group_arn = "${aws_alb_target_group.docker_demo_alb_tg.arn}"
+#  target_id        =  "${element(split(",", join(",", aws_instance.docker_demo.*.id)), count.index)}"
+#  port             = 80
+#}
 
 # creating launch configuration
 resource "aws_launch_configuration" "demo" {
@@ -76,8 +91,13 @@ resource "aws_launch_configuration" "demo" {
   }
 }
 
-# creating auto-scaling group
-resource "aws_autoscaling_group" "demo" {
+
+# aws_autoscaling_group resource takes a target_group_arns parameter that will register the ASG 
+# with the target group so that all instances are registered with the load balancer's target group 
+# as they come up and properly drained from the load balancer before being terminated.
+
+# creating autoscaling group
+resource "aws_autoscaling_group" "docker_demo_asg" {
   name                        = "docker-demo-autoscaling-group"
   launch_configuration = "${aws_launch_configuration.demo.id}"
   #count                   = "${length(var.azs)}"
@@ -100,6 +120,13 @@ resource "aws_autoscaling_group" "demo" {
     propagate_at_launch = true
   }
 }
+
+# autoscaling attachment  
+resource "aws_autoscaling_attachment" "demo_asg_attachment" { 
+  alb_target_group_arn   = "${aws_alb_target_group.docker_demo_alb_tg.arn}"
+  autoscaling_group_name = "${aws_autoscaling_group.docker_demo_asg.id}"
+}
+
 
 # ALB DNS is generated dynamically, return URL so that it can be used
 output "url" {

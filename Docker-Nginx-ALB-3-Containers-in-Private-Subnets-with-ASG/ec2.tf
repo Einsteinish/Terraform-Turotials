@@ -20,19 +20,19 @@ resource "aws_security_group" "docker_demo_ec2" {
 }
 
 # EC2 instances, one per availability zone
-resource "aws_instance" "docker_demo" {
-  ami                         = "${lookup(var.ec2_amis, var.aws_region)}"
-  associate_public_ip_address = true
-  count                       = "${length(var.azs)}"
-  depends_on                  = ["aws_subnet.private"]
-  instance_type               = "t2.micro"
-  subnet_id                   = "${element(aws_subnet.private.*.id,count.index)}"
-  user_data                   = "${file("user_data.sh")}"
+#resource "aws_instance" "docker_demo" {
+#  ami                         = "${lookup(var.ec2_amis, var.aws_region)}"
+#  associate_public_ip_address = true
+#  count                       = "${length(var.azs)}"
+#  depends_on                  = ["aws_subnet.private"]
+#  instance_type               = "t2.micro"
+#  subnet_id                   = "${element(aws_subnet.private.*.id,count.index)}"
+#  user_data                   = "${file("user_data.sh")}"
 
-  # references security group created above
-  vpc_security_group_ids = ["${aws_security_group.docker_demo_ec2.id}"]
+#  # references security group created above
+#  vpc_security_group_ids = ["${aws_security_group.docker_demo_ec2.id}"]
 
-  tags {
-    Name = "docker-nginx-demo-instance-${count.index}"
-  }
-}
+#  tags {
+#    Name = "docker-nginx-demo-instance-${count.index}"
+#  }
+#}
