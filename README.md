@@ -20,6 +20,6 @@
 
 [Terraform Tutorial - Modules](https://www.bogotobogo.com/DevOps/Terraform/Terraform-modules.php)
 
-[Terraform Tutorial - VPC, Subnets, RouteTable, ELB, Security Group, and Apache server I ](https://www.bogotobogo.com/DevOps/Terraform/Terraform-VPC-Subnet-ELB-RouteTable-SecurityGroup-Apache-Server-1.php)
+[Terraform Tutorial - VPC, Subnets, RouteTable, ELB, Security Group, and Apache server I ](https://www.bogotobogo.com/DevOps/Terraform/Terraform-VPC-Subnet-ELB-RouteTable-SecurityGroup-Apache-Server-1.php) - upgraded to 0.15
 
-[Terraform Tutorial - VPC, Subnets, RouteTable, ELB, Security Group, and Apache server II ](https://www.bogotobogo.com/DevOps/Terraform/Terraform-VPC-Subnet-ELB-RouteTable-SecurityGroup-Apache-Server-2.php)
+[Terraform Tutorial - VPC, Subnets, RouteTable, ELB, Security Group, and Apache server II ](https://www.bogotobogo.com/DevOps/Terraform/Terraform-VPC-Subnet-ELB-RouteTable-SecurityGroup-Apache-Server-2.php) - upgraded to 0.15
