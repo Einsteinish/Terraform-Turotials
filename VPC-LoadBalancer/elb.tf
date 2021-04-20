@@ -1,9 +1,8 @@
 # Create a new load balancer
 resource "aws_elb" "terra-elb" {
   name               = "terra-elb"
-  #availability_zones = ["${var.azs}"]
-  subnets = ["${aws_subnet.public.*.id}"]
-  security_groups = ["${aws_security_group.webservers.id}"]
+  subnets = aws_subnet.public.*.id
+  security_groups = [aws_security_group.webservers.id]
 
   listener {
     instance_port     = 80
@@ -20,17 +19,17 @@ resource "aws_elb" "terra-elb" {
     interval            = 30
   }
 
-  instances                   = ["${aws_instance.webservers.*.id}"]
+  instances                   = [aws_instance.webservers[0].id, aws_instance.webservers[1].id]
   cross_zone_load_balancing   = true
   idle_timeout                = 100
   connection_draining         = true
   connection_draining_timeout = 300
 
-  tags {
+  tags = {
     Name = "terraform-elb"
   }
 }
 
 output "elb-dns-name" {
-  value = "${aws_elb.terra-elb.dns_name}"
+  value = aws_elb.terra-elb.dns_name
 }
