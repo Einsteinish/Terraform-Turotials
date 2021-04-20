@@ -1,5 +1,5 @@
 variable "ami" {
-  type = "map"
+  type = map
 
   default = {
     "us-east-1" = "ami-04169656fea786776"
@@ -12,7 +12,7 @@ variable "instance_count" {
 }
 
 variable "instance_tags" {
-  type = "list"
+  type = list
   default = ["Terraform-1", "Terraform-2"]
 }
 
