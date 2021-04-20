@@ -10,7 +10,7 @@
 
 [Terraform Tutorial - variables](https://www.bogotobogo.com/DevOps/Terraform/Terraform-parameters-variables.php)
 
-[Terraform Tutorial - creating multiple instances (count, list type and element() function)](https://www.bogotobogo.com/DevOps/Terraform/Terraform-creating-multiple-instances-count-list-type.php)
+[Terraform Tutorial - creating multiple instances (count, list type and element() function)](https://www.bogotobogo.com/DevOps/Terraform/Terraform-creating-multiple-instances-count-list-type.php) - upgraded to 0.15
 
 [Terraform Tutorial - State (terraform.tfstate) & terraform import](https://www.bogotobogo.com/DevOps/Terraform/Terraform-state-tfstate-import.php)
 
